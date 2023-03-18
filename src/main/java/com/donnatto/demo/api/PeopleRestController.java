@@ -1,5 +1,6 @@
 package com.donnatto.demo.api;
 
+import com.donnatto.demo.application.PeopleService;
 import com.donnatto.demo.model.Person;
 import com.donnatto.demo.model.SwapiService;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.stream.IntStream;
 @AllArgsConstructor
 public class PeopleRestController {
 
+    private final PeopleService peopleService;
     private final SwapiService swapiService;
 
     @GetMapping()
