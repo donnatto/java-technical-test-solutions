@@ -40,6 +40,15 @@ public class SwapiServiceImpl implements SwapiService {
     }
 
     @Override
+    public Mono<Planet> getPlanetById(Integer id) {
+        return webClient.get()
+                .uri("/planets/{id}", id)
+                .retrieve()
+                .bodyToMono(PlanetResponse.class)
+                .map(Mapper::toPlanet);
+    }
+
+    @Override
     public Flux<Person> getPeople(List<Integer> pages) {
         return Flux.fromIterable(pages)
                 .flatMap(this::getPeopleByPage);
@@ -52,5 +61,14 @@ public class SwapiServiceImpl implements SwapiService {
                 .bodyToMono(GetPeopleResponse.class)
                 .map(Mapper::toPersonList)
                 .flatMapMany(Flux::fromIterable);
+    }
+
+    @Override
+    public Mono<Person> getPeopleById(Integer id) {
+        return webClient.get()
+                .uri("/people/{id}", id)
+                .retrieve()
+                .bodyToMono(PeopleResponse.class)
+                .map(Mapper::toPerson);
     }
 }
