@@ -1,6 +1,6 @@
 package com.donnatto.demo.api;
 
-import com.donnatto.demo.application.PeopleService;
+import com.donnatto.demo.model.PeopleService;
 import com.donnatto.demo.model.Person;
 import com.donnatto.demo.model.SwapiService;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class PeopleRestController {
 
     @GetMapping("/{peopleId}")
     public Mono<ResponseEntity<ResponseBody<Person>>> getPeopleById(@PathVariable Integer peopleId) {
-        return swapiService.getPeopleById(peopleId)
+        return peopleService.getPeopleById(peopleId)
                 .map(ResponseEntityBuilder::constructResponseEntity);
     }
 }

@@ -1,23 +1,23 @@
 package com.donnatto.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Entity
 @Table(name = "people")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Person {
+public class Person implements Persistable<Integer> {
     @Id
     private Integer id;
     private String name;
@@ -32,4 +32,15 @@ public class Person {
     private String created;
     private String edited;
     private String url;
+
+    @Transient
+    @JsonIgnore
+    private boolean newPerson;
+
+    @Override
+    @Transient
+    @JsonIgnore
+    public boolean isNew() {
+        return this.newPerson || id == null;
+    }
 }

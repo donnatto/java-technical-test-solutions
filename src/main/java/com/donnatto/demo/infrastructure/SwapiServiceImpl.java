@@ -3,6 +3,7 @@ package com.donnatto.demo.infrastructure;
 import com.donnatto.demo.model.Person;
 import com.donnatto.demo.model.Planet;
 import com.donnatto.demo.model.SwapiService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Service
+@Slf4j
 public class SwapiServiceImpl implements SwapiService {
 
     private final WebClient webClient;
@@ -31,6 +33,7 @@ public class SwapiServiceImpl implements SwapiService {
     }
 
     private Flux<Planet> getPlanetsByPage(Integer page) {
+        log.info("GETTING PEOPLE BY PAGE {} FROM API", page);
         return webClient.get()
                 .uri("/planets?page={page}", page)
                 .retrieve()
@@ -41,6 +44,7 @@ public class SwapiServiceImpl implements SwapiService {
 
     @Override
     public Mono<Planet> getPlanetById(Integer id) {
+        log.info("GETTING PEOPLE BY ID {} FROM API", id);
         return webClient.get()
                 .uri("/planets/{id}", id)
                 .retrieve()
@@ -55,6 +59,7 @@ public class SwapiServiceImpl implements SwapiService {
     }
 
     private Flux<Person> getPeopleByPage(Integer page) {
+        log.info("GETTING PEOPLE BY PAGE {} FROM API", page);
         return webClient.get()
                 .uri("/people?page={page}", page)
                 .retrieve()
@@ -65,6 +70,7 @@ public class SwapiServiceImpl implements SwapiService {
 
     @Override
     public Mono<Person> getPeopleById(Integer id) {
+        log.info("GETTING PEOPLE BY ID {} FROM API", id);
         return webClient.get()
                 .uri("/people/{id}", id)
                 .retrieve()

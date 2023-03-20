@@ -1,6 +1,7 @@
 package com.donnatto.demo.api;
 
 import com.donnatto.demo.model.Planet;
+import com.donnatto.demo.model.PlanetService;
 import com.donnatto.demo.model.SwapiService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.stream.IntStream;
 @AllArgsConstructor
 public class PlanetRestController {
 
+    private final PlanetService planetService;
     private final SwapiService swapiService;
 
     @GetMapping()
@@ -35,7 +37,7 @@ public class PlanetRestController {
 
     @GetMapping("/{planetId}")
     public Mono<ResponseEntity<ResponseBody<Planet>>> getPeopleById(@PathVariable Integer planetId) {
-        return swapiService.getPlanetById(planetId)
+        return planetService.getPlanetById(planetId)
                 .map(ResponseEntityBuilder::constructResponseEntity);
     }
 }

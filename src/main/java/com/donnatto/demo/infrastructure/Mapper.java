@@ -19,7 +19,6 @@ public class Mapper {
                         .gravity(planet.getGravity())
                         .name(planet.getName())
                         .population(planet.getPopulation())
-                        .residents(planet.getResidents())
                         .terrain(planet.getTerrain())
                         .url(planet.getUrl())
                         .build())
@@ -33,7 +32,6 @@ public class Mapper {
                 .gravity(response.getGravity())
                 .name(response.getName())
                 .population(response.getPopulation())
-                .residents(response.getResidents())
                 .terrain(response.getTerrain())
                 .url(response.getUrl())
                 .build();

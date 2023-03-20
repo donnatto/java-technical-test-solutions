@@ -12,7 +12,6 @@ public class PlanetResponse {
     private String gravity;
     private String name;
     private String population;
-    private List<String> residents;
     private String terrain;
     private String url;
 }
